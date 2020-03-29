@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Blog</title>
+
+    <!-- Bootstrap link -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+    <!-- Medium style Editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Abel|Baloo+Thambi+2|Kalam|Kaushan+Script|Special+Elite&display=swap" rel="stylesheet">
+
+  </head>
+  <body class='loader'>
+
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand-lg navbar-light bg-light techfont loader">
+        <div class="container">
+          <a class='navbar-brand bigbrand' href='{% url 'post_list' %}'>My blog</a>
+
+            <div class="collapse navbar-collapse">
+
+                <ul class="navbar-nav bd-navbar-nav flex-row">
+                  <li class="nav-item">
+                  <a class='nav-link nav-item' href="{% url 'about' %}">About</a>
+                  </li>
+
+                  <li class="nav-item">
+                  <a  class="nav-item nav-link" href="https://www.github.com/YuvrajSingh-16" target="_blank">Github</a>
+                  </li>
+
+                  <li class="nav-item">
+                  <a class="nav-item nav-link" href="https://www.linkedin.com/in/yuvraj-singh-kiraula-5819a2196" target="_blank">LinkedIn</a>
+                  </li>
+
+                </ul>
+
+              {% if user.is_authenticated %}
+              <a href="#">||</a>
+              <a class="loader"> Welcome : </a>
+              <a href="#">{{user.username}}</a>
+                </div>
+
+              <ul class='nav navbar-nav navbar-right'>
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'post_new' %}">New Post</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'post_draft_list' %}">Drafts</a>
+              </li>
+
+              <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'logout' %}">Log Out</a>
+              </li>
+
+              {% else %}
+              <li class="nav-item loader">
+                <a class='nav-link p-2 nav-right' href="{% url 'login' %}">
+                <span class='glyphicon glyphicon-user' aria-hidden='true'></span>
+                </a>
+              </li>
+              {% endif %}
+            </ul>
+
+      </nav>
+
+      <!-- Content block -->
+
+      <div class="content container bkg">
+        <div class="row">
+          <div class="col-xs-12 col-6">
+              <div class="blog_posts">
+                {% block content %}
+                {% endblock %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+  </body>
+</html>
